@@ -27,4 +27,5 @@ class Info(Turtle):
         self.goto(-width/2 + 20, height/2 - 25)
         self.write(arg="Press 'r' to reset or 'q' to quit", align='left', font=('Verdana', 13, 'normal'))
         self.goto(width/2 - 20, round(self.ycor()))
-        self.write(arg="Left paddle controls: A/Z, Right paddle: Up/Down", align='right', font=('Verdana', 13, 'normal'))
+        self.write(arg="Left paddle controls: A/Z, Right paddle: Up/Down", align='right',
+                   font=('Verdana', 13, 'normal'))
