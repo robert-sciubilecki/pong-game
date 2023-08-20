@@ -1,11 +1,18 @@
 from turtle import Turtle
 from random import choice
 
-BOUNCE_DIRECTION = {
+BOUNCE_DIRECTION_WALL = {
     45: 315,
-    315: 225,
+    315: 45,
     225: 135,
-    135: 45
+    135: 225
+}
+
+BOUNCE_DIRECTION_PADDLE = {
+    45: 135,
+    135: 45,
+    225: 315,
+    315: 225
 }
 
 
@@ -18,11 +25,14 @@ class Ball(Turtle):
         self.reset_ball()
 
     def fly(self):
-        self.forward(0.7)
+        self.forward(1)
 
-    def bounce(self):
+    def bounce(self, element):
         heading = round(self.heading())
-        self.setheading(BOUNCE_DIRECTION[heading])
+        if element == 'paddle':
+            self.setheading(BOUNCE_DIRECTION_PADDLE[heading])
+        elif element == 'wall':
+            self.setheading(BOUNCE_DIRECTION_WALL[heading])
 
     def coordinates(self):
         x, y = round(self.xcor()), round(self.ycor())
@@ -36,5 +46,5 @@ class Ball(Turtle):
             return True
 
     def reset_ball(self):
-        self.setheading(choice([value for value in BOUNCE_DIRECTION.values()]))
+        self.setheading(choice([value for value in BOUNCE_DIRECTION_WALL.values()]))
         self.goto(0, 0)

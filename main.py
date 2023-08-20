@@ -19,7 +19,6 @@ top_border, bottom_border = board_painter.paint_borders(WIDTH, HEIGHT)
 
 paddle_right = Paddle(x=PADDLE_RIGHT_X, y=0, top_border=top_border, bottom_border=bottom_border)
 paddle_left = Paddle(x=PADDLE_LEFT_X, y=0, top_border=top_border, bottom_border=bottom_border)
-
 paddles = [paddle_left, paddle_right]
 
 score_board_left = Scoreboard(-50)
@@ -30,13 +29,11 @@ screen.listen()
 
 screen.onkey(paddle_right.up, 'Up')
 screen.onkey(paddle_right.down, 'Down')
-
 screen.onkey(paddle_left.up, 'a')
 screen.onkey(paddle_left.down, 'z')
 # CAPS LOCK PROOF
 screen.onkey(paddle_left.up, 'A')
 screen.onkey(paddle_left.down, 'Z')
-
 ball = Ball()
 
 
@@ -68,7 +65,6 @@ def game():
     time.sleep(1)
     screen.onkey(reset, 'r')
     screen.onkey(reset, 'R')
-
     screen.onkey(quit_game, 'q')
     screen.onkey(quit_game, 'Q')
     while game_on:
@@ -76,31 +72,26 @@ def game():
             animation(paddle_right, paddle_right.movement)
         if paddle_left.movement:
             animation(paddle_left, paddle_left.movement)
-
         ball.fly()
         time.sleep(0.0001)
-
         screen.update()
-
         ball_x, ball_y = ball.coordinates()
         if ball_x < PADDLE_LEFT_X + 30:
             if ball.contact(paddle_left):
-                ball.bounce()
+                ball.bounce('paddle')
             if ball_x < PADDLE_LEFT_X - 20:
                 score_board_right.increase_score()
                 score()
-
         elif ball_x > PADDLE_RIGHT_X - 30:
             if ball.contact(paddle_right):
-                ball.bounce()
+                ball.bounce('paddle')
             if ball_x > PADDLE_RIGHT_X + 20:
                 score_board_left.increase_score()
                 score()
-
         if ball_y == bottom_border:
-            ball.bounce()
+            ball.bounce('wall')
         elif ball_y == top_border:
-            ball.bounce()
+            ball.bounce('wall')
 
 
 def reset():

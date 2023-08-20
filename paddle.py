@@ -34,7 +34,7 @@ class Paddle(Turtle):
 
     def coordinates(self):
         x, y = round(self.xcor()), round(self.ycor())
-        y_coors = [y_cor for y_cor in range(y-50, y+50, 1)]
+        y_coors = [y_cor for y_cor in range(y-50, y+60, 1)]
 
         if x < 0:
             x_coors = x+15
